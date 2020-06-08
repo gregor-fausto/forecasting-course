@@ -1,0 +1,177 @@
+\documentclass[12pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% set up packages, geometry
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{geometry}
+\usepackage{textcomp}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{subcaption}
+\usepackage{bm}
+\usepackage[superscript,noadjust]{cite} % puts dash in citations to abbreviate
+	
+\geometry{letterpaper, marginparwidth=60pt}                   		
+
+%\usepackage [autostyle, english = american]{csquotes} % sets US-style quotes
+%\MakeOuterQuote{"} % sets quote style
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% set up code
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\usepackage{etoolbox}
+\AtBeginEnvironment{quote}{\small}
+
+\usepackage{float}
+\usepackage{color}
+
+\usepackage{pgf, tikz, eqnarray}
+\usetikzlibrary{arrows, automata}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{plain}                                                      %%
+%%%%%%%%%% EXAFT 1in MARGINS %%%%%%%                                   %%
+\setlength{\textwidth}{6.5in}     %%                                   %%
+\setlength{\oddsidemargin}{0in}   %% (It is recommended that you       %%
+\setlength{\evensidemargin}{0in}  %%  not change these parameters,     %%
+\setlength{\textheight}{8.5in}    %%  at the risk of having your       %%
+\setlength{\topmargin}{0in}       %%  proposal dismissed on the basis  %%
+\setlength{\headheight}{0in}      %%  of incorrect formatting!!!)      %%
+\setlength{\headsep}{0in}         %%                                   %%
+\setlength{\footskip}{.5in}       %%                                   %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                                   %%		
+
+%%%%%%%%%%%%%
+% DEFINE CODE BLOCK
+%%%%%%%%%%%%%
+\usepackage{listings}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=R,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+ % keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3,
+  otherkeywords={0,1,2,3,4,5,6,7,8,9},
+  deletekeywords={data,frame,length,as,character,dunif,ps},
+}
+
+%%% BIBLIOGRAPHY
+\usepackage{natbib}
+%\bibliographystyle{abbrvnat}
+\setcitestyle{authoryear,open={(},close={)}}
+
+%%% START DOCUMENT
+
+\begin{document} 
+
+\tableofcontents
+
+\clearpage
+
+\section{Characterizing uncertainty}
+
+...
+
+\section{Hierarchical Bayes}
+
+\section{Expert elicitation}
+
+\section{State-space}
+
+\section{Dynamic models}
+
+\section{Machine learning}
+
+\section{PROACT}
+
+\section{Propagating uncertainty}
+
+\section{Analytical data assimilation}
+
+\section{Ensemble data assimilation}
+
+\section{Social science}
+
+\section{Model assessment}
+
+\section{Forecast infrastructure/FLARE case study}
+
+
+%%% LIST
+\begin{itemize}
+\item 
+
+\item 
+
+\item 
+
+\end{itemize}
+
+%%% MATH
+\begin{align}
+\dot{x_1} & = u(t) x_1 \nonumber \\
+\dot{x_2} & = (1-u(t)) x_1 
+\end{align}
+
+%%% MATRIX
+\begin{equation}
+A_{11}=
+  \begin{bmatrix}
+    -1		& 0 	 	& \ldots 	& 0  	 \\
+    0 	 	& -1  	& \ddots 	& \vdots  \\
+    \vdots   & \ddots 	& -1		& 0  \\
+    0 		& \ldots 	& 0 		& -1  
+  \end{bmatrix}_{ t \times t}
+\end{equation}
+
+%%% CODE CHUNK 
+\begin{lstlisting}
+## Function that computes values of derivatives in the ODE system
+## Takes the time step, system of differential equations, parameters
+derivs = numeric(2); 
+control <- function(times0,y,parms,f1,...) {
+  
+  # x1 and x2 are the two entries in y (ode)
+  x1=y[1]; 
+  
+  # values calculated by the interpolated function at different time points
+  u <- f1(times0);
+  
+  derivs = c(u*x1,(1-u)*x1) 
+  return(list(derivs));
+}
+## Compiles the function control()
+control=cmpfun(control); 
+\end{lstlisting}
+
+\clearpage
+\nocite{*}
+
+\bibliographystyle{/Users/gregor/Dropbox/bibliography/styleFiles/ecology} 
+\bibliography{/Users/gregor/Dropbox/bibliography/forecasting-course}
+
+\end{document}
