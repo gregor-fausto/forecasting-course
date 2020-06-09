@@ -532,6 +532,46 @@ You can also take a process-free and equation-free approach to predicting the fu
 
 \section{Machine learning}
 
+Presenter: Ethan Deyle
+
+Nonlinear forecasting can be traced back to a 1990 paper by Sugihara and May (\cite{sugihara1990}). They used a nearest-neighbor approach to forecasting multivariate data. Also Edward Lorenz's work in climate and "knn nearest-neighbor" pattern recognition.
+
+Terminology: machine learning, non-parametric, model-free, non-structural. What we're really looking at is prediction without parameters. As a contrast, Dietze (\cite{dietze2017a}).
+
+$$Y_{t+1} = f(Y_t, X_t | \bar{\theta} ) + \epsilon_t$$
+
+All of these approaches come back to universal function approximators. This includes nearest-neighbor forecasting, generalizations of regression, ...
+
+When do you want to use non-parametric approaches? When there might be no good parametric equations, unknown or unmeasured variables, unmanageable parametric complexity. Another case might be when you're trying to integrate big data stream or if there's non-traditional information.
+
+Google Flu was a project that thought it would be possible to use search data to predict flue trends. \cite{lazer2014} diagnose problems with the Google Flu approach.
+
+It's hard to apply information theoretic (AIC/BIC) measures of data and it can be easy to include arbitrarily good fits to the data. 
+
+This makes it important to do cross-validation. There's a model training data set, and the forecast skill is evaluated on a separate set. Sometimes this is done by splitting the data into parts. When the data are really limited, you might do "leave-one-out" (LOO).
+
+\subsection{Empirical dynamic modeling}
+
+Takens' Theorem...
+
+The underlying idea is to identify the geometry of the data. Video talks about taking the lag of a time series and trying to recover the full extent of the data ??? Similar to the idea that you're going to rewrite a system of ODEs equations.... Natural relationship between time lags and derivatives.
+
+Relationship between forecasting and causality. Made by Clive Granger (\cite{granger1969}): If Y is causing X, then our forecast should be better if we include Y in our forecast than if we exclude it. This depends on separability of causes and effects that isn't applicable to a lot of realistic ecosystems. 
+
+Convergent cross-mapping is relevant...
+
+\subsection{Case study: recruitment in marine fisheries}
+
+Parametric approaches use age-structured models. These models assume constant mortality across adult age classes and recruitment that needs to be forecast. There are a few parametric models that are used to model recruitment: Ricker, Beverton-Holt, Schnute...
+
+Poor fits are common! One hypothesis is that the measurements of recruitment are too uncertain or too incomplete. Another is that recruitment is driven by stochastic environmental factors. Another is that the models of recruitment are wrong/incomplete. 
+
+The video shows an example of a deterministic model that seems to show process/observation error but in fact is a product of an unmeasured 
+
+Pierre et al. 2018, Much et al. 2018, Giron-Nava et al.
+
+All use variations of empirical dynamic modeling to investigate recruitment prediction/the stock recruitment relationship.
+
 \section{PROACT}
 
 \section{Propagating uncertainty}

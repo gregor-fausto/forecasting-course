@@ -43,7 +43,6 @@ temp is in celsius
 Let's start by looking at the data. Here's the nymph data to begin with:
 
 ```{r}
-
 nymphDataWithMet <- nymphDataWithMet %>%
   dplyr::mutate(day = as.Date(Day))
 
@@ -51,20 +50,22 @@ nymphDataWithMet <- nymphDataWithMet %>%
    geom_point(aes(x=day,y=totalNymph)) + 
    facet_wrap(~Site) +
    ylab("Total Nymphs (count)") +
-   xlab("Date")
+   xlab("Date") +
+   theme_bw()
 ```
 
 And here's the adult data:
 
 ```{r}
 adultDataWithMet <- adultDataWithMet %>%
-  dplyr::mutate(day = as.Date(Day))
+  dplyr::mutate(day = as.Date(Day)) 
 
  ggplot(data=adultDataWithMet) + 
    geom_point(aes(x=day,y=totalAdult)) + 
    facet_wrap(~Site) +
    ylab("Total Adults (count)") +
-   xlab("Date")
+   xlab("Date") +
+   theme_bw()
 ```
 Some first notes are that site `SERC` does not have data for 2014. So that's one less year than the other sites. Site `SCBI` has the least within-year variation, and site `OSBS` has the most within-year variation.
 
@@ -85,5 +86,123 @@ Email, chat over the slack, Github.
 Emelia: email is good
 Anna: Slack is good for code
 
+## State-space model
+
+\[\begin{align*} [\phi, \lambda, \pmb{N}, \sigma^{2}_{p}] \mid \pmb{y}] &\propto \prod_{i=2}^{n}[y_{t} \mid N_{t}, \phi][N_{t} \mid \lambda, N_{t-1}, \sigma^{2}_{p}] [N_{1}\mid \phi, \sigma^{2}_{p}][\phi][\lambda][\sigma^{2}_{p}]\\ y_{t} &\sim \text{Poisson}(N_{t}\phi)\\ N_{t} &\sim \text{lognormal}(\log(\lambda(N_{t-1}-H_{t-1})), \sigma^{2}_{p})\\ \phi &\sim \text{beta}(154, 792)\\ N_{1} &\sim \text{lognormal}\bigg(\log\bigg(\frac{y_{i}}{\phi}\bigg), \sigma^{2}_{p}\bigg)\\ \lambda &\sim \text{uniform}(0.1, 10)\\ \sigma^{2}_{p} &\sim \text{uniform}(0, 5)\\ \end{align*}\]
+
 ## First goal: set up a random walk for one of the sites.
+
+```{r}
+library(rjags)
+library(MCMCvis)
+```
+Work with only one site, and filter to training dataset.
+
+```{r}
+data = adultDataWithMet %>% 
+  dplyr::filter(Site=="SERC") %>%
+  dplyr::filter(trainValidate=="Train")
+  
+```
+
+```{r}
+time = as.Date(data$Day)
+y = data$totalAdult
+```
+
+One of the problems we're encountering is that we have a lot of 0s in our data, so log-transforming those values immediately turns them into `-Inf`. What are some ways of dealing with this for random walk models?
+
+```{r}
+plot(time,y,type='p',ylab="Total Adults",lwd=2,log='y')
+```
+
+We'll start by trying to fit a random walk model. Change the data model to a poisson. The linear predictor for the Poisson is with a log-link. The mean of a Poisson can be explained by a linear process.
+
+```{r}
+RandomWalk = "
+model{
+  
+  #### Data Model
+  for(t in 1:n){
+    Ex[t] = log(x[t])
+    y[t] ~ dpois(Ex[t])
+  }
+  
+  #### Process Model
+  for(t in 2:n){
+    x[t]~dnorm(x[t-1],tau_add)
+  }
+  
+  #### Priors
+  x[1] ~ dnorm(x_ic,tau_ic)
+  #tau_obs ~ dgamma(a_obs,r_obs)
+  tau_add ~ dgamma(a_add,r_add)
+}
+"
+```
+
+Define the data as a list.
+
+```{r}
+data <- list(y=y,
+             n=length(y),
+             x_ic=log(1000),
+             tau_ic=100,
+             #a_obs=1,
+             #r_obs=1,
+             a_add=1,
+             r_add=1)
+```
+
+Define initial conditions:
+
+```{r}
+nchain = 3
+init <- list()
+for(i in 1:nchain){
+  y.samp = sample(y,length(y),replace=TRUE)
+  init[[i]] <- list(tau_add=1/var(diff(log(y.samp))))#,tau_obs=5/var(log(y.samp)))
+}
+```
+
+Send to JAGS:
+
+```{r}
+j.model   <- jags.model (file = textConnection(RandomWalk),
+                             data = data,
+                             inits = init,
+                             n.chains = 3)
+```
+
+```{r, fig.asp = 1.0}
+## burn-in
+jags.out   <- coda.samples (model = j.model,
+                            variable.names = c("tau_add"),
+                                n.iter = 1000)
+plot(jags.out)
+```
+Run model.
+
+```{r}
+jags.out   <- coda.samples (model = j.model,
+                            variable.names = c("Ex","x","tau_add","tau_obs"),
+                                n.iter = 10000)
+```
+
+```{r}
+time.rng = c(1,length(time)) ## adjust to zoom in and out
+out <- as.matrix(jags.out)
+x.cols <- grep("^Ex",colnames(out)) ## grab all columns that start with the letter x
+ci <- apply(exp(out[,x.cols]),2,quantile,c(0.025,0.5,0.975)) ## model was fit on log scale
+
+plot(time,ci[2,],type='n',ylim=c(0,range(y)[2]),ylab="Counts",xlim=time[time.rng],main="SERC Adults")
+## adjust x-axis label to be monthly if zoomed
+if(diff(time.rng) < 100){ 
+  axis.Date(1, at=seq(time[time.rng[1]],time[time.rng[2]],by='month'), format = "%Y-%m")
+}
+ecoforecastR::ciEnvelope(time,ci[1,],ci[3,],col=ecoforecastR::col.alpha("lightBlue",0.75))
+points(time,y,pch="+",cex=0.5)
+```
+Note that this model misses all 0s.
+
 ## Second goal: could then set up a workflow to run the other sites with the same model
