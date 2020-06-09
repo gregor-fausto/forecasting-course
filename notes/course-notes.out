@@ -1,13 +1,29 @@
 \BOOKMARK [1][-]{section.1}{Characterizing uncertainty}{}% 1
 \BOOKMARK [1][-]{section.2}{Hierarchical Bayes}{}% 2
-\BOOKMARK [1][-]{section.3}{Expert elicitation}{}% 3
-\BOOKMARK [1][-]{section.4}{State-space}{}% 4
-\BOOKMARK [1][-]{section.5}{Dynamic models}{}% 5
-\BOOKMARK [1][-]{section.6}{Machine learning}{}% 6
-\BOOKMARK [1][-]{section.7}{PROACT}{}% 7
-\BOOKMARK [1][-]{section.8}{Propagating uncertainty}{}% 8
-\BOOKMARK [1][-]{section.9}{Analytical DA}{}% 9
-\BOOKMARK [1][-]{section.10}{Ensemble DA}{}% 10
-\BOOKMARK [1][-]{section.11}{Social science}{}% 11
-\BOOKMARK [1][-]{section.12}{Model assessment}{}% 12
-\BOOKMARK [1][-]{section.13}{Forecast infrastructure/FLARE case study}{}% 13
+\BOOKMARK [2][-]{subsection.2.1}{Hierarchical models}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Random effects}{section.2}% 4
+\BOOKMARK [3][-]{subsubsection.2.2.1}{Model 1: Global mean}{subsection.2.2}% 5
+\BOOKMARK [3][-]{subsubsection.2.2.2}{Model 2: Random temporal effect}{subsection.2.2}% 6
+\BOOKMARK [3][-]{subsubsection.2.2.3}{Model 3: Random block effect}{subsection.2.2}% 7
+\BOOKMARK [3][-]{subsubsection.2.2.4}{Model 4: Random block and time effect}{subsection.2.2}% 8
+\BOOKMARK [2][-]{subsection.2.3}{Nonlinear hierarchical models}{section.2}% 9
+\BOOKMARK [2][-]{subsection.2.4}{Prediction}{section.2}% 10
+\BOOKMARK [1][-]{section.3}{Expert elicitation}{}% 11
+\BOOKMARK [1][-]{section.4}{State-space}{}% 12
+\BOOKMARK [2][-]{subsection.4.1}{When to use state space models}{section.4}% 13
+\BOOKMARK [2][-]{subsection.4.2}{Random walk state space model}{section.4}% 14
+\BOOKMARK [2][-]{subsection.4.3}{Dynamic linear state space model}{section.4}% 15
+\BOOKMARK [2][-]{subsection.4.4}{Nonlinear state space model: capture-recapture}{section.4}% 16
+\BOOKMARK [2][-]{subsection.4.5}{Assessment}{section.4}% 17
+\BOOKMARK [1][-]{section.5}{Dynamic models}{}% 18
+\BOOKMARK [2][-]{subsection.5.1}{Examples}{section.5}% 19
+\BOOKMARK [2][-]{subsection.5.2}{Building a process based model}{section.5}% 20
+\BOOKMARK [2][-]{subsection.5.3}{When are dynamic models appropriate for forecasts?}{section.5}% 21
+\BOOKMARK [1][-]{section.6}{Machine learning}{}% 22
+\BOOKMARK [1][-]{section.7}{PROACT}{}% 23
+\BOOKMARK [1][-]{section.8}{Propagating uncertainty}{}% 24
+\BOOKMARK [1][-]{section.9}{Analytical data assimilation}{}% 25
+\BOOKMARK [1][-]{section.10}{Ensemble data assimilation}{}% 26
+\BOOKMARK [1][-]{section.11}{Social science}{}% 27
+\BOOKMARK [1][-]{section.12}{Model assessment}{}% 28
+\BOOKMARK [1][-]{section.13}{Forecast infrastructure/FLARE case study}{}% 29

@@ -1,0 +1,89 @@
+---
+output: html_document
+---
+
+Load packages.
+
+```{r}
+library(tidyverse)
+```
+
+### Read data
+
+The file `neonTickMetData.R` matches data and produces the csv files below. 
+
+How is sampling done? These are data on counts of lone star ticks. Tick sampling is done by dragging or flagging. A person walks a transect and drags a one square meter cloth behind them. Afterwards they count the ticks. From the field data, all they have is information on numbers. For the taxonomic data, they ID the nymphs and adults down to species.
+
+What's the life cycle? The nymph will emerge in the spring and try to take a blood meal. We might see adults later in the year or next year if they are successful in feeding. They only take one blood meal per life stage.
+
+These counts have been corrected for effort. The effort that went into sampling each row is the same. 
+
+The abundances are collated (summed) across the site. There is one meteorological station per site.
+
+Q: how big are the sites?
+
+```{r, echo=FALSE}
+directory = "/Users/Gregor/Dropbox/workshops/forecasting-course/project/groupprojectdata/"
+fileNames <- paste0(directory,list.files(directory))
+
+adultDataWithMet <- read.csv(fileNames[1])
+nymphDataWithMet <- read.csv(fileNames[3])
+```
+
+## Data structure
+
+There are 2 data streams when you download the tick dataset. There is taxonomic data and field data. 
+
+total precip is mm
+RH is in %
+temp is in celsius
+
+## Data exploration
+
+Let's start by looking at the data. Here's the nymph data to begin with:
+
+```{r}
+
+nymphDataWithMet <- nymphDataWithMet %>%
+  dplyr::mutate(day = as.Date(Day))
+
+ ggplot(data=nymphDataWithMet) + 
+   geom_point(aes(x=day,y=totalNymph)) + 
+   facet_wrap(~Site) +
+   ylab("Total Nymphs (count)") +
+   xlab("Date")
+```
+
+And here's the adult data:
+
+```{r}
+adultDataWithMet <- adultDataWithMet %>%
+  dplyr::mutate(day = as.Date(Day))
+
+ ggplot(data=adultDataWithMet) + 
+   geom_point(aes(x=day,y=totalAdult)) + 
+   facet_wrap(~Site) +
+   ylab("Total Adults (count)") +
+   xlab("Date")
+```
+Some first notes are that site `SERC` does not have data for 2014. So that's one less year than the other sites. Site `SCBI` has the least within-year variation, and site `OSBS` has the most within-year variation.
+
+## What's the outstanding question?
+
+John: focus on the time component and try to forecast the 2018 season.
+
+Shannon: may want to focus on one site to start. 
+
+Do a random walk and then try to figure out which covariates to include in a dynamic linear model.
+
+Could also build a forecast model at one site and see if it forecasts another site. 
+
+## How will we collaborate over the week?
+
+Email, chat over the slack, Github.
+
+Emelia: email is good
+Anna: Slack is good for code
+
+## First goal: set up a random walk for one of the sites.
+## Second goal: could then set up a workflow to run the other sites with the same model

@@ -1,13 +1,29 @@
 \contentsline {section}{\numberline {1}Characterizing uncertainty}{2}{section.1}
-\contentsline {section}{\numberline {2}Hierarchical Bayes}{2}{section.2}
-\contentsline {section}{\numberline {3}Expert elicitation}{2}{section.3}
-\contentsline {section}{\numberline {4}State-space}{2}{section.4}
-\contentsline {section}{\numberline {5}Dynamic models}{2}{section.5}
-\contentsline {section}{\numberline {6}Machine learning}{2}{section.6}
-\contentsline {section}{\numberline {7}PROACT}{2}{section.7}
-\contentsline {section}{\numberline {8}Propagating uncertainty}{2}{section.8}
-\contentsline {section}{\numberline {9}Analytical DA}{2}{section.9}
-\contentsline {section}{\numberline {10}Ensemble DA}{2}{section.10}
-\contentsline {section}{\numberline {11}Social science}{2}{section.11}
-\contentsline {section}{\numberline {12}Model assessment}{2}{section.12}
-\contentsline {section}{\numberline {13}Forecast infrastructure/FLARE case study}{2}{section.13}
+\contentsline {section}{\numberline {2}Hierarchical Bayes}{4}{section.2}
+\contentsline {subsection}{\numberline {2.1}Hierarchical models}{4}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Random effects}{5}{subsection.2.2}
+\contentsline {subsubsection}{\numberline {2.2.1}Model 1: Global mean}{6}{subsubsection.2.2.1}
+\contentsline {subsubsection}{\numberline {2.2.2}Model 2: Random temporal effect}{7}{subsubsection.2.2.2}
+\contentsline {subsubsection}{\numberline {2.2.3}Model 3: Random block effect}{7}{subsubsection.2.2.3}
+\contentsline {subsubsection}{\numberline {2.2.4}Model 4: Random block and time effect}{8}{subsubsection.2.2.4}
+\contentsline {subsection}{\numberline {2.3}Nonlinear hierarchical models}{8}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Prediction}{8}{subsection.2.4}
+\contentsline {section}{\numberline {3}Expert elicitation}{9}{section.3}
+\contentsline {section}{\numberline {4}State-space}{10}{section.4}
+\contentsline {subsection}{\numberline {4.1}When to use state space models}{10}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Random walk state space model}{10}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Dynamic linear state space model}{11}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}Nonlinear state space model: capture-recapture}{11}{subsection.4.4}
+\contentsline {subsection}{\numberline {4.5}Assessment}{12}{subsection.4.5}
+\contentsline {section}{\numberline {5}Dynamic models}{12}{section.5}
+\contentsline {subsection}{\numberline {5.1}Examples}{13}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Building a process based model}{13}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}When are dynamic models appropriate for forecasts?}{13}{subsection.5.3}
+\contentsline {section}{\numberline {6}Machine learning}{14}{section.6}
+\contentsline {section}{\numberline {7}PROACT}{14}{section.7}
+\contentsline {section}{\numberline {8}Propagating uncertainty}{14}{section.8}
+\contentsline {section}{\numberline {9}Analytical data assimilation}{14}{section.9}
+\contentsline {section}{\numberline {10}Ensemble data assimilation}{14}{section.10}
+\contentsline {section}{\numberline {11}Social science}{14}{section.11}
+\contentsline {section}{\numberline {12}Model assessment}{14}{section.12}
+\contentsline {section}{\numberline {13}Forecast infrastructure/FLARE case study}{14}{section.13}
