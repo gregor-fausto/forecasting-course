@@ -704,7 +704,7 @@ Numeric & Monte Carlo & Ensemble  \\ \hline
 \end{tabular}
 \end{table}
 
-Analytical methods for variable transformation are the gold standard. Fairly non-trivial.
+Analytical methods for variable transformation are the gold standard. Fairly non-trivial. These are calculus-demanding!
 
 Analytical moments. There are clear rules for these. For example: $Var(aX) = a^2 Var(X)$. Algebra of means is quite intuitive but the algebra of variances is a bit trickier. These methods only work out if you are using linear combinations of random variables. Non-linear models become more complicated and analytical moments don't provide an exact solution.
 
@@ -745,18 +745,39 @@ Jensen's inequality states that the mean of a function is not equal to plugging 
 
 Monte Carlo Simulation --> distributions. You take these samples from the distributions, run models, and then save the results. What you're sampling here is that you want to sample rows from your posterior (to properly capture covariances across parameters). There's a simulation that shows that when the number of. For each of the lines, you're getting an intercept and variance from the posterior distribution. Then you're drawing a line and repeating this process is what results in the classic hourglass characterization of uncertainty. To get an interval is to apply quantile function across. 
 
-Ensemble analysis --> moments. People usually are talking about a smaller number of samples for this. Ultimately, the goal is to fit PDF to the results and using the PDF for intervals. This is in part because you need smaller N to estimate the moments. This is in part a tradeoff because you are assuming a shape by doing so. Generally, for approximating a distribution you want an effective sample size of ~5000. If you are trying to get a stable estimate of (eg.) mean you can do so with tens or hundreds.
+Ensemble analysis --> moments. People usually are talking about a smaller number of samples for this. Ultimately, the goal is to fit PDF to the results and using the PDF for intervals. This is in part because you need smaller N to estimate the moments. This is in part a tradeoff because you are assuming a shape by doing so. Generally, for approximating a distribution you want an effective sample size of ~5000. If you are trying to get a stable estimate of (eg.) mean you can do so with tens or hundreds. For example, this is weather forecasts! 
 
 Choice between the two: if you have a computationally efficient model you can run the full Monte Carlo method.
 
-
-
 \subsection{Uncertainty analysis}
+
+Idea is to estimate the contribution of each input to output. Things can be important because they are uncertain or sensitive.
+
+You can have high predictive uncertainty with high sensitivity/high uncertainty, high sensitivity/low uncertainty, or low sensitivity/high uncertainty.
+
+Variance decomposition with switchgrass yield. One way of viewing this is: plotting CV for parameters, plotting elasticity for parameters. So you can see that the partial variance of parameters is driven both by CV and elasticity. (e.g. \cite{raczka2018}). These can provide information for model-data feedbacks.
 
 \subsection{Optimal design}
 
 
-\section{Analytical data assimilation}
+\section{Data assimilation: analytical methods}
+
+Presenter: Mike Dietze
+
+Iteratively updating models as new data becomes available. This is part of the forecast-analysis cycle.
+
+\subsection{Analysis Problem}
+
+Before we observe how the future plays out, what is the best estimate for the future state of the system $X_{t+1}$? This ends up being the forecast, $P(X_{t+1})$
+
+Once we make (imperfect) observations of the system, $Y_t$, what's our best estimate of $X_t$?
+
+$$P(X_{t+1}) = P(Y_{t+1}) $$
+
+$$P(X_{t+1} \mid Y_{t+1}) \prop P(Y_{t+1} | X_{t+1}) P(X_{t+1}) $$
+
+This is equivalent to the posterior, which is proportional to the likelihood times the prior (the forecast). This means that the analysis problem itself is Bayes theorem. (this is the key!!)
+
 
 \section{Ensemble data assimilation}
 

@@ -1,5 +1,7 @@
 ---
-output: html_document
+output:
+  html_document:
+    df_print: paged
 ---
 
 ## Data
@@ -24,7 +26,7 @@ The file `neonTickMetData.R` (written by John Foster) matched data from NEON tic
 
 Here we read in the data.
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE}
 library(tidyverse)
 
 directory = "/Users/Gregor/Dropbox/workshops/forecasting-course/project/groupprojectdata/"
@@ -47,6 +49,7 @@ nymphDataWithMet <- nymphDataWithMet %>%
    xlab("Date") +
    theme_bw()
 ```
+
 And here's the adult data:
 
 ```{r}
@@ -214,15 +217,11 @@ dataForPlotting = adultDataWithMet %>%
   dplyr::filter(Site=="SERC") %>%
   dplyr::filter(trainValidate=="Train")
 
-ggplot() +
-    geom_ribbon(data=sum.data,aes(x=time,ymin=X2.5.,ymax=X97.5.),
-                color="cornflowerblue",fill="cornflowerblue",alpha=0.5) +
-      geom_line(data=sum.data,aes(x=time,y=X50.),color="black") +
-  geom_point(data=dataForPlotting,aes(x=day,y=totalAdult)) +
-  theme_classic() + 
-  xlab("Time") + ylab("Total Adults (counts)") +  ggtitle("SERC Adults") 
-```
-
-```{r}
-rm(list = ls())
+# ggplot() +
+#     geom_ribbon(data=sum.data,aes(x=time,ymin=X2.5.,ymax=X97.5.),
+#                 color="cornflowerblue",fill="cornflowerblue",alpha=0.5) +
+#       geom_line(data=sum.data,aes(x=time,y=X50.),color="black") +
+#   geom_point(data=dataForPlotting,aes(x=day,y=totalAdult)) +
+#   theme_classic() + 
+#   xlab("Time") + ylab("Total Adults (counts)") +  ggtitle("SERC Adults") 
 ```
