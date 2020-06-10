@@ -20,10 +20,19 @@
 \BOOKMARK [2][-]{subsection.5.2}{Building a process based model}{section.5}% 20
 \BOOKMARK [2][-]{subsection.5.3}{When are dynamic models appropriate for forecasts?}{section.5}% 21
 \BOOKMARK [1][-]{section.6}{Machine learning}{}% 22
-\BOOKMARK [1][-]{section.7}{PROACT}{}% 23
-\BOOKMARK [1][-]{section.8}{Propagating uncertainty}{}% 24
-\BOOKMARK [1][-]{section.9}{Analytical data assimilation}{}% 25
-\BOOKMARK [1][-]{section.10}{Ensemble data assimilation}{}% 26
-\BOOKMARK [1][-]{section.11}{Social science}{}% 27
-\BOOKMARK [1][-]{section.12}{Model assessment}{}% 28
-\BOOKMARK [1][-]{section.13}{Forecast infrastructure/FLARE case study}{}% 29
+\BOOKMARK [2][-]{subsection.6.1}{Empirical dynamic modeling}{section.6}% 23
+\BOOKMARK [2][-]{subsection.6.2}{Case study: recruitment in marine fisheries}{section.6}% 24
+\BOOKMARK [2][-]{subsection.6.3}{Other approaches to nonparametric estimation}{section.6}% 25
+\BOOKMARK [1][-]{section.7}{PROACT: Structured decision making}{}% 26
+\BOOKMARK [2][-]{subsection.7.1}{Decision support}{section.7}% 27
+\BOOKMARK [3][-]{subsubsection.7.1.1}{Problems and objectives}{subsection.7.1}% 28
+\BOOKMARK [3][-]{subsubsection.7.1.2}{Alternatives}{subsection.7.1}% 29
+\BOOKMARK [3][-]{subsubsection.7.1.3}{Consequences}{subsection.7.1}% 30
+\BOOKMARK [3][-]{subsubsection.7.1.4}{Trade-offs}{subsection.7.1}% 31
+\BOOKMARK [3][-]{subsubsection.7.1.5}{Sample decision matrix}{subsection.7.1}% 32
+\BOOKMARK [1][-]{section.8}{Propagating uncertainty}{}% 33
+\BOOKMARK [1][-]{section.9}{Analytical data assimilation}{}% 34
+\BOOKMARK [1][-]{section.10}{Ensemble data assimilation}{}% 35
+\BOOKMARK [1][-]{section.11}{Social science}{}% 36
+\BOOKMARK [1][-]{section.12}{Model assessment}{}% 37
+\BOOKMARK [1][-]{section.13}{Forecast infrastructure/FLARE case study}{}% 38

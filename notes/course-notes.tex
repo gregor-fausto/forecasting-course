@@ -572,7 +572,110 @@ Pierre et al. 2018, Much et al. 2018, Giron-Nava et al.
 
 All use variations of empirical dynamic modeling to investigate recruitment prediction/the stock recruitment relationship.
 
-\section{PROACT}
+\subsection{Other approaches to nonparametric estimation}
+
+cognub.com/index.php/cognitive-platform.
+
+Symbolic regression: predicting time-to-flowering in chickpeas incorporating climate drivers and genetic variation.
+
+\section{PROACT: Structured decision making}
+
+Presenter: Melissa Kenney
+
+\subsection{Decision support}
+
+Major components of a decisions are: uncertain scientific information and forecasts, individual or stakeholder values, and constraints (environmental, social, or regulatory).
+
+When we talk about decision support it's not just forecasts, but also processes to allow scientists and decision makers to work together. It's important to figure out ways of co-producing ecological forecasts so that scientists and stakeholders are working together to produce useful information. It's not just a model where we push out information and hope it's useful. But we're also not trying to develop something that's useful to only a narrow set of people.
+
+Work with stakeholders to develop forecasts related to decisions that they care about. How do we make projections that are related to specific interventions. Ecological forecasts are a virtual laboratory. This is what Hollings talks about on his book on adaptive management. 
+
+Models are an alternative to unethical interventions. Interesting to think about this as a 'benefit of models'.
+
+How do we break down models? One acronym is Problem Objective Alternatives Consequences Trade-offs: PROACT. This is discussed in the decision support chapter.
+
+This is not a linear process. Ideally you would be improving your management actions over time. 
+
+Structured decision making is described in book by Robin Gregory (Structured decision making).
+
+\subsubsection{Problems and objectives}
+
+The first step is making sure that we have a problem that's appropriate for a decision context. There are multiple stakeholders that need to be part of the conversation. Understanding those perspectives and identifying a shared problem is critical. This is the first step to getting a shared solution.
+
+What are your objectives? These are your goals. While we might care about many environmental goals, there are also social goals/objectives that must be part of the conversation. For example, cost, social equity, robust participatory process. Those are just as important and one way to consider them is to make sure all relevant stakeholders are heard.
+
+If you're missing objectives, your model is likely incomplete. It doesn't mean it is not informative but you may not have all important information.
+
+Some of the criteria to consider: complete, concise, controllable, understandable, preferentially independent (don't need to know about cost to know about maximizing ecological enhancement).
+
+Exercise: What are the decision objectives when making a decision about planning a trip to Boston (specifically the transit). First, propose 3-4 decision objectives and specify the desired direction of change (max/min).
+
+Performance measures are linked to objectives. We need to have information that predicts particular performance measures (PMs). For a given objective, you can have 1 or more PMs. For example, if you are interested in water quality, you could look at various aspects of water chemistry.
+
+A big design challenge is how you represent the performance measure.
+
+Let's take population growth of a species. Types of measures: natural measures (abundance), proxy (area of habitat), or a constructed scale (this could be performance measure specific). The last can translate latent concepts into concrete concepts. 
+
+Time has natural performance measures. Productivity have proxy or scale measures: number of people, wifi connectivity, 5 star rating for travel.
+
+Use of threshholds can also be helpful for dealing with probabilistic outcomes
+
+\subsubsection{Alternatives}
+
+What are your options, what decisions can you make? This is one of the most difficult pieces because if we start with what we care about it may be easier to come up with more options to consider.
+
+This idea is called "value-focused thinking". Starting by thinking about what you care about will help you think more creatively about what you want to accomplish.
+
+This is a place where scientists can be transparent and defensible. The timeframe is really important as well.
+
+Will also help with identifying boundary conditions.
+
+The alternatives have to be complete. In the travel example, you have to consider transit time door-to-door. This is the idea of making apples-to-apples comparisons.
+
+\subsubsection{Consequences}
+
+This is where forecasts come into play. Forecasts can be projections that are the result of combining boundary conditions and scenarios.
+
+An important thing when combining forecasts with decisions is the time horizon. A mismatch means that the information that's produced might not be useful.
+
+This is where performance measures come into play. Want to think about designing model output that links to specific objectives that we care about.
+
+One of the reasons that ecologists and decision makers have to think hand-in-hand, is that if they don't then we end up with forecasts that are not useful. Alternatively, it might not be possible to provide the kind of information that a decision maker is asking for.
+
+\subsubsection{Trade-offs}
+
+How do we make choices between different alternatives? This is challenging because we are often measuring multiple things, have many different choices, care about different things, and have uncertainty. 
+
+A decision scientist or operations research expert can help apply these methods in a robust way.
+
+Three major tradeoff methods: dominance, robust, multi-attribute criteria. Dominance: there's never a better choice. Robust: likely options that may allow for flexibility. Multi-attribute criteria methods: comparing across a range of different objectives.
+
+We can often combine objectives with a weighted utility function. This is important when we have multiple stakeholders.
+
+There are rigorous ways to assess these utilities by doing preference elicitation: mapping between desirability and utility. Can also construct weights.
+
+It's often not our goal to make the final judgment, that's the decision makers goal.
+
+Dominated means that it is equal or worse on all measures. Below, there is a better option than train on all objectives (bus on cost, plane on time, productivity in bus, disease risk for drive).
+
+Increases in uncertainty translate into increases in risk.
+
+Working in order is important - don't jump ahead to measurement! This gives you an objective/structured way of assessing decisions/actions. Can get people agreeing to actions but for different reasons.
+
+\subsubsection{Sample decision matrix}
+
+Here's an example that we worked with in the class as a contingency table:
+
+\begin{table}[h!]
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+Objective & Measure & Airplane & Drive & Train & Bus \\ \hline
+minimize cost & dollars  & 200  & 100 & 45 & 5  \\ \hline
+minimize time & hours & 2 & 4 & 4 & 4 \\ \hline
+maximize productivity during transit & wifi quality & 3  & 1 & 4 & 4 \\ \hline
+minimize disease risk & people in vehicle  & 100  & 1  & 100  & 60 \\ \hline
+\end{tabular}
+\end{table}
 
 \section{Propagating uncertainty}
 
