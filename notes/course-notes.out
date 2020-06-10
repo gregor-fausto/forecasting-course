@@ -31,8 +31,12 @@
 \BOOKMARK [3][-]{subsubsection.7.1.4}{Trade-offs}{subsection.7.1}% 31
 \BOOKMARK [3][-]{subsubsection.7.1.5}{Sample decision matrix}{subsection.7.1}% 32
 \BOOKMARK [1][-]{section.8}{Propagating uncertainty}{}% 33
-\BOOKMARK [1][-]{section.9}{Analytical data assimilation}{}% 34
-\BOOKMARK [1][-]{section.10}{Ensemble data assimilation}{}% 35
-\BOOKMARK [1][-]{section.11}{Social science}{}% 36
-\BOOKMARK [1][-]{section.12}{Model assessment}{}% 37
-\BOOKMARK [1][-]{section.13}{Forecast infrastructure/FLARE case study}{}% 38
+\BOOKMARK [2][-]{subsection.8.1}{Sensitivity analysis}{section.8}% 34
+\BOOKMARK [2][-]{subsection.8.2}{Uncertainty propagation}{section.8}% 35
+\BOOKMARK [2][-]{subsection.8.3}{Uncertainty analysis}{section.8}% 36
+\BOOKMARK [2][-]{subsection.8.4}{Optimal design}{section.8}% 37
+\BOOKMARK [1][-]{section.9}{Analytical data assimilation}{}% 38
+\BOOKMARK [1][-]{section.10}{Ensemble data assimilation}{}% 39
+\BOOKMARK [1][-]{section.11}{Social science}{}% 40
+\BOOKMARK [1][-]{section.12}{Model assessment}{}% 41
+\BOOKMARK [1][-]{section.13}{Forecast infrastructure/FLARE case study}{}% 42

@@ -84,9 +84,6 @@
 %\bibliographystyle{abbrvnat}
 \setcitestyle{authoryear,open={(},close={)}}
 
-\usepackage{makeidx}
-\makeindex
-
 %%% START DOCUMENT
 
 \begin{document} 
@@ -103,7 +100,7 @@
 
 \noindent Presenter: Shannon LaDeau
 
-Classic assumptions\index{classic assumptions} of the linear model:
+Classic assumptions of the linear model:
 
 \begin{itemize}
 \item Homoskedasticity
@@ -145,16 +142,16 @@ Beyond the classic assumptions, what are you going to do with real ecological da
  
 For non-normal data (e.g. a 0/1), we have a data model, a process model that contains a link and a linear model, and then a parameter model. Another assumption that might be violated is constant variance, so could model the variance as a function of data. Shannon presents an example in which the data are modeled with a constant versus a changing variance, which shows that the credible interval changes if using a model with variance changing. Capturing uncertainty in this case does not mean improving your estimate of the response but rather actually means doing a better job of capturing the increase in variance.
 
-Now we move on to observation error\index{observation error}. A regression model assumes that all error is in the Y [$Y \sim N(\beta_1 + \beta_2 x_i, \sigma^2)$. But sometimes we also don't measure X very well either, and so there is error in the predictor variables. Imagine that you are getting error in X but you are not measuring that. One way of modeling that is considering errors in variables. Here we are modeling X as a random variable.
+Now we move on to observation error. A regression model assumes that all error is in the Y [$Y \sim N(\beta_1 + \beta_2 x_i, \sigma^2)$. But sometimes we also don't measure X very well either, and so there is error in the predictor variables. Imagine that you are getting error in X but you are not measuring that. One way of modeling that is considering errors in variables. Here we are modeling X as a random variable.
 
  \begin{align}
 Y \sim N(\beta_1 + \beta_2 x_i, \sigma^2) \\
 X^{(o)} \sim N(\chi, \tau^2)
  \end{align}
  
-Now we move on to latent variables\index{latent variables}. These are any variable that is not directly observed such as: missing data, variables that are measured with error (biased or random), and proxy measures. Ignoring variable latency (e.g. modeling a .... ???)
+Now we move on to latent variables. These are any variable that is not directly observed such as: missing data, variables that are measured with error (biased or random), and proxy measures. Ignoring variable latency (e.g. modeling a .... ???)
 
-With a good model, you might be able to make predictions of missing data\index{missing data}. For example, you might be able to use regression to fill it in. In a Bayesian framework, the model can predict missing Ys but you can do the same thing and estimate missing predictors. However, to do this you need to develop a model for the missing X and a model for how those missing X influence the Ys. To make this work, you need to assume that data is missing at random. Data that is missing systematically can not be estimated but you need a better model if it's missing systematically. It's a powerful approach but you're not going to do magic with the data. 
+With a good model, you might be able to make predictions of missing data. For example, you might be able to use regression to fill it in. In a Bayesian framework, the model can predict missing Ys but you can do the same thing and estimate missing predictors. However, to do this you need to develop a model for the missing X and a model for how those missing X influence the Ys. To make this work, you need to assume that data is missing at random. Data that is missing systematically can not be estimated but you need a better model if it's missing systematically. It's a powerful approach but you're not going to do magic with the data. 
 
 An example comes from a forest ecology FACE experiment at a pine plantation in Duke Forest. The experiment measured the seed response to CO2 fumigation. So to get fecundity of trees, there's often a relationship between tree size and seed number (seed number as a function of diameter). In Shannon's data on cone counts, there is a lot of individual variability. So they used data on cones and seeds to inform (latent) fecundity estimates. They were able to combine data from seed baskets to constrain what is observation error and what is natural variability. The study is described in \cite{ladeau2006}.
 
@@ -228,7 +225,7 @@ Here's how the above model is related to random effects
 
 Some important things to note are that random effects always have a mean 0 (see $\alpha_k$). This is the same as saying that the difference from the global mean is unbiased. Random effects variance attributes a portion of uncertainty to a specific source (subscripted by $k$).
 
-Random effects\index{random effects} are generally applied to aspects of a study that would not be the same if replicated. For example, this might include things like plots, block, year, individuals, etc. There is also often some amount of replication for the random effect to be identifiably different from the residual "noise" term $J \sim N(0, \sigma^2) $. In practice, random effects are often used to account for a lack of independence among these units. In contrast, fixed effects\index{fixed effects} include things like treatments and covariates of interest. 
+Random effects are generally applied to aspects of a study that would not be the same if replicated. For example, this might include things like plots, block, year, individuals, etc. There is also often some amount of replication for the random effect to be identifiably different from the residual "noise" term $J \sim N(0, \sigma^2) $. In practice, random effects are often used to account for a lack of independence among these units. In contrast, fixed effects include things like treatments and covariates of interest. 
 
 We are using random effects to account for unexplained variance associated with groups. This may point to scales (temporal, spatial) that may need additional explanation. Adding covariates or fixed effects may explain some of the variance but there's always something unmeasured and sometimes additional fixed effects are not justified.
 
@@ -679,6 +676,86 @@ minimize disease risk & people in vehicle  & 100  & 1  & 100  & 60 \\ \hline
 
 \section{Propagating uncertainty}
 
+How does a change in X translate into a change in Y? [$\delta x -> \delta y$]
+
+\subsection{Sensitivity analysis}
+
+One numerical method is: One at a time perturbation. Modify individual parameters and look at the response. Something that has changed a lot is that previously sensitivity analyses were done at arbitrary e.g. 10\% but if you have an uncertainty then you can do sensitivity at 1, 2, 3 standard deviations or quantiles for non normal distributions.
+
+Monte Carlo sensitivity analysis is one of the global sensitivity analyses. Here, these allow you to look at the full shape of the sensitivity. Fitting a regression slope through cloud of points will tell you something about the average sensitivity. The other one is the partial R2 associated with input. Partial R2 tells you how much is it contributing to the overall variability.
+
+The main tradeoff is computational: how well can you characterize the global sensitivity versus how much it will cost you computationally.
+
+\subsection{Uncertainty propagation}
+
+Transforming uncertainty into the future is more generally a problem of transforming functions.
+
+An analytic approach gives us an equation. A numeric approach is often computationally demanding.
+
+What do we want to get out? Maybe the full distribution? Or just the statistical moments?
+
+This is table 11.1 in the textbook: 
+
+\begin{table}[h!]
+\begin{tabular}{l|l|l|}
+ & Distribution & Moments  \\ \hline
+Analytic & Variable transform  & Analytical moments or Taylor Series    \\ \hline
+Numeric & Monte Carlo & Ensemble  \\ \hline
+\end{tabular}
+\end{table}
+
+Analytical methods for variable transformation are the gold standard. Fairly non-trivial.
+
+Analytical moments. There are clear rules for these. For example: $Var(aX) = a^2 Var(X)$. Algebra of means is quite intuitive but the algebra of variances is a bit trickier. These methods only work out if you are using linear combinations of random variables. Non-linear models become more complicated and analytical moments don't provide an exact solution.
+
+Let's see what this is doing:
+
+\begin{align} y = m \theta + b \\
+m = \delta y / \delta \theta \\
+Var[y] = Var[m \theta + b ] \\
+Var[y] = m^2 Var[\theta] \\
+Var[y] = (\delta y / \delta \theta)^2 Var[ \theta ]
+\end{align}
+
+These equations emphasize that the uncertainty in a prediction is determined by (1) the uncertainty in the model's inputs ($Var(\theta)$) and (2) the sensitivity of the prediction to those inputs ($\delta y / \delta \theta$). So you can be misled by focusing on parameters that are really sensitive but that you know very well. Instead, uncertainty can be determined by what you don't know much about!
+
+What about non-linear models? For one, you can use linear approximations (estimate with a straight line...)
+
+\begin{align} y = f(x \mid \theta) \\
+Var[y] \sim (\delta y / \delta \theta)^2 Var[ \theta ]
+\end{align}
+
+This is related to using a Taylor series decomposition. Eg. for one parameter
+
+\begin{align}
+Var[ f(x \mid \theta)] \sim Var[ f(x \mid \bar{\theta}) + \frac{ \frac{df}{d\theta} ( x \mid \bar{\theta} )}{1!} ( \theta - \bar{\theta})] + ... \\
+var[f(x)] \sim  (\frac{df}{d\theta_i} )^2 var[\theta]
+\end{align}
+
+For multiple parameters this becomes more complicated. The covariances among your parameters becomes really important!! The full joint posterior of your distributions are important. You have to sample for the joint distribution. It's that correlation that gives a classic hourglass shape in confidence intervals.
+
+\begin{align}
+Var[ f(x \mid \theta)] \Sigma Var[ f(x \mid \bar{\theta}) + \frac{ \frac{df}{d\theta} ( x \mid \bar{\theta} )}{1!} ( \theta - \bar{\theta})] + ... \\
+var[f(x)] \sim \Sigma (\frac{df}{d\theta_i} )^2 var[\theta_i] + \Sigma_{i\neq j} ( \frac{df}{d\theta_i} )(\frac{df}{d\theta_j} ) cov(\theta_i, \theta_j)
+\end{align}
+
+Numerical ways of propagating uncertainty. We can take samples of a distribution and transform those samples through a function to another distribution. 
+
+Jensen's inequality states that the mean of a function is not equal to plugging the mean inputs into that function. Because of this, you can not transform mean or standard deviations. What you can transform is samples of a distribution (this gets around Jensen's inequality).
+
+Monte Carlo Simulation --> distributions. You take these samples from the distributions, run models, and then save the results. What you're sampling here is that you want to sample rows from your posterior (to properly capture covariances across parameters). There's a simulation that shows that when the number of. For each of the lines, you're getting an intercept and variance from the posterior distribution. Then you're drawing a line and repeating this process is what results in the classic hourglass characterization of uncertainty. To get an interval is to apply quantile function across. 
+
+Ensemble analysis --> moments. People usually are talking about a smaller number of samples for this. Ultimately, the goal is to fit PDF to the results and using the PDF for intervals. This is in part because you need smaller N to estimate the moments. This is in part a tradeoff because you are assuming a shape by doing so. Generally, for approximating a distribution you want an effective sample size of ~5000. If you are trying to get a stable estimate of (eg.) mean you can do so with tens or hundreds.
+
+Choice between the two: if you have a computationally efficient model you can run the full Monte Carlo method.
+
+
+
+\subsection{Uncertainty analysis}
+
+\subsection{Optimal design}
+
+
 \section{Analytical data assimilation}
 
 \section{Ensemble data assimilation}
@@ -736,10 +813,6 @@ control <- function(times0,y,parms,f1,...) {
 ## Compiles the function control()
 control=cmpfun(control); 
 \end{lstlisting}
-
-\clearpage
-
-\printindex
 
 \clearpage
 \nocite{*}
