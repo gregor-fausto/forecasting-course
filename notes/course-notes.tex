@@ -774,10 +774,90 @@ Once we make (imperfect) observations of the system, $Y_t$, what's our best esti
 
 $$P(X_{t+1}) = P(Y_{t+1}) $$
 
-$$P(X_{t+1} \mid Y_{t+1}) \prop P(Y_{t+1} | X_{t+1}) P(X_{t+1}) $$
+$$P(X_{t+1} \mid Y_{t+1}) \sim P(Y_{t+1} | X_{t+1}) P(X_{t+1}) $$
 
 This is equivalent to the posterior, which is proportional to the likelihood times the prior (the forecast). This means that the analysis problem itself is Bayes theorem. (this is the key!!)
 
+\subsection{Simplest analysis}
+
+Assume the forecast is $P(X_{t+1} \sim N(\mu, \tau^2) $
+
+Assume the observation error: $ P(Y_{t+1} | X_{t+1}) \sim N(X_{t+1}, \sigma^2) $
+
+The likelihood is equal to the data model.
+
+So we assume Y, mu tau and sigma are known.
+
+$ P(Y_{t+1} | X_{t+1}) \sim N(X_{t+1}, \sigma^2) $
+
+The simplest example is given at page 178 in the textbook.
+
+So here are two situations. First, if the data are less precise then the posterior should stay close to the prior (the forecast). If the data is less precise, then the posterior will be pulled towards the data.
+
+What is the impact of trying to assimilate data when the uncertainty estimate is overconfident in the data? If we are overconfident in the data, we will follow the noise in the data.
+
+\subsection{Simplest forecast}
+
+Assume a process model with $X_{t+1} = m X_t + \epsilon_t$ which is random walk if m=1.
+
+Process error $\epsilon_t \sim N(0, q)$
+
+We assume that m and q are known.
+
+State uncertainty (IC - initial conditions): $P(X_t \mid Y_t) \sim N( \mu_a , \tau_a^2)$
+
+So how do we figure out what our forecast is? $P(X_{t+1})$
+
+We can derive this analytically: $E(X_{t+1}) = E(mX_t + \epsilon_t) = m\mu_t$
+
+$$Var(X_{t+1}) = Var(mX_t + \epsilon_t)$$
+
+this is 
+$$m^2Var(X_t) + Var(\epsilon_t) + 2mCov(X_t,\epsilon_t)$$ 
+which is approximately 
+$$m^2Var(X_t) + Var(\epsilon_t) $$ 
+$$m^2 p_a + q $$ 
+
+So the forecast $P(X_{t+1}) \sim N(m \mu_a, m^2 p_a + q)$ The probability of our system in the future is normally distributed given by our model's slope and where the system started ($\mu_a$). The uncertainty is the combination of slope squared (the sensitivity). $p_a$ is actually the inital condition uncertainty. q is the process error. The forecast uncertainty is everything that comes after the comma.
+
+\subsection{Forecast cycle}
+
+So now we can combine these things. We have a forecast step, and then the analysis step. There is an iterative analytical solution to these steps. The analytical solution is known as the Kalman filter, named after Rudolf Kalman.
+
+Forecast step: $P(X_{t+1})
+
+Analysis step: $P(X_{t+1} \mid Y_{t+1})
+
+State space model is a smoother, the Kalman filter is a filter. Can use covariance structure to update latent variables. Information at different locations can help constrain.
+
+What models are contributing are a covariance structure. How should the covariance between different processes in space and time be related to each other? Even if you can't make a scatterplot between how variable X and Y are related, your understanding of how the process works are used to link different datasets together.
+
+\subsection{Multivariate generalization}
+
+\begin{itemize}
+\item (n x 1) vector of state means, $\mu_a$ or $\mu_f$
+\item (n x n) state error covariance matrix, $p_a$ or $p_f$
+\item (p x 1) vector of observations, Y
+\item (p x p) observation error covariance matrix R
+\item (p x n) observation matrix, H
+\item (n x n) linear process model, M (matrix mdel)
+\item (n x n) process error covariance matrix, Q
+\end{itemize}
+
+$$X_a \mid Y \sim N(Y \mid H X_a, R) N(X_a \mu_f, P_f) $$
+
+Conceptually, the precisions will add up. The means will be a weighted average of the means.
+
+This ends up being similar to kriging. You're filling in your covariance matrix to fill in the covariance matrix between parameters.
+
+The Kalman filter was used in the Apollo navigation system!
+
+Pros of the Kalman Filter: it's analytically tractable, and it depends only on the previous state, the current forecast, and the current data.
+
+Cons of the Kalman Filter: it's linear, involves matrix inversion, assumes all parameters (H, R, M, Q) are known, and is forward only.
+
+Taylor series maps on to the extendend Kalman filter
+Ensemble maps on to ensemble Kalman filter
 
 \section{Ensemble data assimilation}
 
